@@ -7,6 +7,7 @@ use App\Http\Resources\TaskResource;
 use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use Cloudinary\Cloudinary;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -55,12 +56,17 @@ class ProjectController extends Controller
     public function store(StoreProjectRequest $request)
     {
         $data = $request->validated();
-        /** @var $image \Illuminate\Http\UploadedFile */
         $image = $data['image'] ?? null;
         $data['created_by'] = Auth::id();
         $data['updated_by'] = Auth::id();
-        if ($image) {
-            $data['image_path'] = $image->store('project/' . Str::random(), 'public');
+        if($image){
+            $fileName = $image->getClientOriginalName();
+            $data['file_name']=$fileName;
+            $cloudinary = new Cloudinary();
+            $uploadApi = $cloudinary->uploadApi();
+            $result = $uploadApi->upload($image->getrealPath(),$options = []);
+            $data['image_path'] =$result['url'];
+            $data['public_id']=$result['public_id'];
         }
         Project::create($data);
 
@@ -115,10 +121,16 @@ class ProjectController extends Controller
         $image = $data['image'] ?? null;
         $data['updated_by'] = Auth::id();
         if ($image) {
+            $cloudinary = new Cloudinary();
+            $uploadApi = $cloudinary->uploadApi();
             if ($project->image_path) {
-                Storage::disk('public')->deleteDirectory(dirname($project->image_path));
+                $uploadApi->destroy($project->public_id, $options = []);
             }
-            $data['image_path'] = $image->store('project/' . Str::random(), 'public');
+            $fileName = $image->getClientOriginalName();
+            $data['file_name']=$fileName;
+            $result = $uploadApi->upload($image->getrealPath(),$options = []);
+            $data['image_path'] =$result['url'];
+            $data['public_id']=$result['public_id'];
         }
         $project->update($data);
 
@@ -132,10 +144,12 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         $name = $project->name;
-        $project->delete();
         if ($project->image_path) {
-            Storage::disk('public')->deleteDirectory(dirname($project->image_path));
+            $cloudinary = new Cloudinary();
+            $uploadApi = $cloudinary->uploadApi();
+            $uploadApi->destroy($project->public_id, $options = []);
         }
+        $project->delete();
         return to_route('project.index')->with('success',"Project \"$name\" was deleted");
     }
 }

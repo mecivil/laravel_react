@@ -20,6 +20,8 @@ class Task extends Model
         'created_by',
         'updated_by',
         'project_id',
+        'file_name',
+        'public_id'
     ];
 
     public function project()

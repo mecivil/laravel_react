@@ -10,6 +10,7 @@ use App\Models\Task;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
 use App\Models\User;
+use Cloudinary\Cloudinary;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -65,13 +66,19 @@ class TaskController extends Controller
      */
     public function store(StoreTaskRequest $request)
     {
+        
         $data = $request->validated();
-        /** @var $image \Illuminate\Http\UploadedFile */
         $image = $data['image'] ?? null;
         $data['created_by'] = Auth::id();
         $data['updated_by'] = Auth::id();
-        if ($image) {
-            $data['image_path'] = $image->store('task/' . Str::random(), 'public');
+        if($image){
+            $fileName = $image->getClientOriginalName();
+            $data['file_name']=$fileName;
+            $cloudinary = new Cloudinary();
+            $uploadApi = $cloudinary->uploadApi();
+            $result = $uploadApi->upload($image->getrealPath(),$options = []);
+            $data['image_path'] =$result['url'];
+            $data['public_id']=$result['public_id'];
         }
         Task::create($data);
 
@@ -113,10 +120,16 @@ class TaskController extends Controller
         $image = $data['image'] ?? null;
         $data['updated_by'] = Auth::id();
         if ($image) {
+            $cloudinary = new Cloudinary();
+            $uploadApi = $cloudinary->uploadApi();
             if ($task->image_path) {
-                Storage::disk('public')->deleteDirectory(dirname($task->image_path));
+                $uploadApi->destroy($task->public_id, $options = []);
             }
-            $data['image_path'] = $image->store('task/' . Str::random(), 'public');
+            $fileName = $image->getClientOriginalName();
+            $data['file_name']=$fileName;
+            $result = $uploadApi->upload($image->getrealPath(),$options = []);
+            $data['image_path'] =$result['url'];
+            $data['public_id']=$result['public_id'];
         }
         $task->update($data);
 
@@ -130,10 +143,13 @@ class TaskController extends Controller
     public function destroy(Task $task)
     {
         $name = $task->name;
-        $task->delete();
+        
         if ($task->image_path) {
-            Storage::disk('public')->deleteDirectory(dirname($task->image_path));
+            $cloudinary = new Cloudinary();
+            $uploadApi = $cloudinary->uploadApi();
+            $uploadApi->destroy($task->public_id, $options = []);
         }
+        $task->delete();
         return to_route('task.index')
             ->with('success', "Task \"$name\" was deleted");
             

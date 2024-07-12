@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->longText('description')->nullable();
+            $table->string('file_name')->nullable();
             $table->string('image_path')->nullable();
+            $table->string('public_id')->nullable();
             $table->string('status');
             $table->string('priority');
             $table->timestamp('due_date')->nullable();

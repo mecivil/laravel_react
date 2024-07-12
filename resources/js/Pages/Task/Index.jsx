@@ -6,11 +6,9 @@ import TasksTable from "./TasksTable";
 import { useEffect, useState } from "react";
 export default function Index({ auth, success, tasks, queryParams = null }) {
   const [msg,setSucmsg]=useState(success);
-  useEffect(()=>{
     setTimeout(() => {
       setSucmsg(null);
     }, 5000);
-  });
   return (
     <AuthenticatedLayout
       user={auth.user}

@@ -50,11 +50,10 @@ export default function Index({ auth, projects, queryParams = null, success }) {
     alert(`The project ${project.name} was deleted successfully`);
   };
   const [msg,setSucmsg]=useState(success);
-  useEffect(()=>{
+ 
     setTimeout(() => {
       setSucmsg(null);
     }, 5000);
-  });
   return (
     <AuthenticatedLayout
       user={auth.user}
