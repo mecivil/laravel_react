@@ -1,66 +1,69 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+**Project Manager App**
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This is a Laravel 11 React Inertia app using Laravel Breeze as the starter  kit.
+At the backend php and MySQL databases are used. The frontend is handled by react. The inertia acts as a glue between the frontend and the backend.
 
-## About Laravel
+Steps to be followed to run the app locally for Windows environment
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+1 Install xampp from https://www.apachefriends.org/ <br />
+2 Install composer from https://getcomposer.org/download/ <br />
+3 Install node.js from https://nodejs.org/en <br />
+  Install everything above to their default directory as directed without changing anything. Changing may cause problems later. <br />
+4 Download the zip file from <>Code button and click download zip <br />
+5 Extract the zip folder to the Downloads directory by clicking Extract All. You can choose any other path but in that case choose the path in the next steps accordingly. <br />
+6 Write Environment Variables in Windows search box and open Edit the system environment variables <br />
+7 Click on Environment Variables <br />
+8 Under the System variables section double click on variable path <br />
+9 Edit environment variable window will open <br />
+10 Check if the following paths are added. If not then add these paths click on ok and again ok <br />
+   C:\xampp\php <br />
+   C:\ProgramData\ComposerSetup\bin <br />
+   C:\Program Files\nodejs\ <br />
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+  If you have installed xampp and composer to different location then put their respective paths. <br />
+  
+  ![environsetup](https://github.com/user-attachments/assets/144857be-87b1-4178-87eb-270b0da5a63b)
+ <br />
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+11 Open two powershell terminals. Type cd C:\Users\username\Downloads\laravel_react-master\laravel_react-master in both of them. <br />
+   In place of username type your own computer's username. <br />
+12 Type the following commands one after another in any one of the powershell terminals. Wait for each operation to complete. <br />
+   composer diagnose </br>
+   Scroll down to the bottom. If it says "zip: extension not loaded"  open xampp control panel.Click on config button beside Apache  and then click on PHP(php.ini)<br />
+   Then Ctrl+F and search for zip . Click on the down arrow . Remove the semicolon in front of extension=zip .Click on File and Save. Now proceed with below commands. <br />
+   composer install <br />
+   npm install <br />
+13 After the execution of above commands type in one of the terminals:<br />
 
-## Learning Laravel
+   php artisan serve <br />
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+   <br />
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+   In the other terminal write :<br />
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+   npm run dev <br />
 
-## Laravel Sponsors
+14 Now go to localhost:8000 <br />
+15 Voila! The app is running. <br />
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+![login](https://github.com/user-attachments/assets/89d41804-6845-4325-b57b-c6f374fe49a2)
+ <br />
 
-### Premium Partners
+ ![dashboard](https://github.com/user-attachments/assets/1f55bdfc-f212-43e5-b279-8dc50f0267c0)
+<br />
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+![projects](https://github.com/user-attachments/assets/569a4c26-78d1-4d27-8ecd-afe58a81304e)
+ <br />
 
-## Contributing
+ ![Tasks](https://github.com/user-attachments/assets/c943ac64-3128-4a67-90b8-9aa535a76f95)
+<br />
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+ ![Users](https://github.com/user-attachments/assets/b46c945c-55eb-454e-b693-aa6ae3b138b9)
+<br />
 
-## Code of Conduct
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
+   
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
