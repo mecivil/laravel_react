@@ -42,9 +42,9 @@ Steps to be followed to run the app locally for Windows environment
    In the other terminal write :<br />
 
    npm run dev <br />
-
-14 Now go to localhost:8000 <br />
-15 Voila! The app is running. <br />
+14 Provide your email (only gmail) addresses at the specified locations in the .env file
+15 Now go to localhost:8000 <br />
+**Voila! The app is running.** <br />
 
 ![login](https://github.com/user-attachments/assets/89d41804-6845-4325-b57b-c6f374fe49a2)
  <br />
